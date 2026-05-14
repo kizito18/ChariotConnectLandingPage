@@ -243,10 +243,29 @@ fun MultiplePackageSection(
                 sectionContent.listOfChangeableImg.forEachIndexed { index, image ->
 
 
+
+
+                    Image(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .objectFit(ObjectFit.Contain)
+                            .styleModifier {
+                                property("opacity", "0")
+                                property("pointer-events", "none")
+                                property("display", "block")
+                                property("position", "relative")
+                                property("z-index", "0")
+                            },
+                        src = sectionContent.listOfChangeableImg[1],
+                        description = "",
+                    )
+
+
                     // Current image (sliding out to the right)
                     Image(
                         modifier = Modifier
-                            .fillMaxSize()
+                            //.fillMaxSize()
+                            .fillMaxWidth()
                             .objectFit(ObjectFit.Contain)
                             .styleModifier {
                                 property("opacity", if (isAnimating) "0" else "1")
@@ -266,7 +285,8 @@ fun MultiplePackageSection(
                         // if (isAnimating) {
                         Image(
                             modifier = Modifier
-                                .fillMaxSize()
+                                //.fillMaxSize()
+                                .fillMaxWidth()
                                 .objectFit(ObjectFit.Contain)
                                 .styleModifier {
                                     property(
@@ -298,7 +318,8 @@ fun MultiplePackageSection(
                         .transition(
                             Transition.of(property = "transform", duration = 200.ms)
                         )
-                        .fillMaxSize()
+                        //.fillMaxSize()
+                        .fillMaxWidth()
                         .objectFit(ObjectFit.Contain)
                         .onContextMenu { event ->
                             event.preventDefault()

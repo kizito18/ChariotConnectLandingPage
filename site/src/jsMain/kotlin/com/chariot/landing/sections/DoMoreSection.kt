@@ -325,7 +325,7 @@ fun DoMoreSectionSection(
 
                 CustomButton(
                     breakpoint = breakpoint,
-                    buttonText = riderContent.buttonText,
+                    buttonText = vendorContent.buttonText,
                     // fontSizeValue = 15.px,
                     // fontWeightValue = FontWeight.Medium,
                     textColor = ThemeByKizito.Button_Blue_Color.rgb,

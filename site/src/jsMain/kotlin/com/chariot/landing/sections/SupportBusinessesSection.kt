@@ -10,6 +10,7 @@ import com.varabyte.kobweb.compose.css.ObjectFit
 import com.varabyte.kobweb.compose.css.Transition
 import com.varabyte.kobweb.compose.css.UserSelect
 import com.varabyte.kobweb.compose.foundation.layout.Arrangement
+import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
@@ -118,22 +119,28 @@ fun SupportBusinessesSection() {
         ) {
 
 
+            Box(modifier = Modifier
+                .fillMaxWidth(),
+                contentAlignment = Alignment.CenterEnd
+            ) {
 
-            Image(
-                modifier = Modifier
-                    .transition(
-                        Transition.of(property = "transform", duration = 200.ms)
-                    )
-                    .fillMaxSize()
-                    .objectFit(ObjectFit.Contain)
-                    .onContextMenu { event ->
-                        event.preventDefault()
-                        event.stopPropagation()
-                    }
-                    .zIndex(1f),
-                src = sectionContent.img,
-                description = "image",
-            )
+                Image(
+                    modifier = Modifier
+                        .transition(
+                            Transition.of(property = "transform", duration = 200.ms)
+                        )
+                        .fillMaxWidth()
+                        .objectFit(ObjectFit.Contain)
+                        .onContextMenu { event ->
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+                        .zIndex(1f),
+                    src = sectionContent.img,
+                    description = "image",
+                )
+
+            }
 
 
 
