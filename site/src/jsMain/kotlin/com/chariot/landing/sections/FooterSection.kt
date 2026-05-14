@@ -24,6 +24,7 @@ import com.varabyte.kobweb.compose.css.ObjectFit
 import com.varabyte.kobweb.compose.css.TextDecorationLine
 import com.varabyte.kobweb.compose.css.Transition
 import com.varabyte.kobweb.compose.css.UserSelect
+import com.varabyte.kobweb.compose.css.svw
 import com.varabyte.kobweb.compose.foundation.layout.Arrangement
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
@@ -157,9 +158,12 @@ private fun BottonPart(
 
         SimpleGrid(
             numColumns = numColumns(base = 1, md = 2),
-            Modifier.fillMaxWidth()
-                //.display(DisplayStyle.Grid)
-
+            Modifier
+            .fillMaxWidth()  // use fillMaxWidth instead of 100.svw
+                .styleModifier {
+                    property("box-sizing", "border-box")
+                    property("overflow", "hidden") // prevents any child from bleeding out
+                }
                 .gap(
                     rowGap = if (breakpoint <= Breakpoint.ZERO) {
                         20.px
@@ -332,6 +336,9 @@ private fun BottonPart(
 
 
 
+                /*
+
+
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                     modifier = Modifier
@@ -353,6 +360,7 @@ private fun BottonPart(
                         },
                         modifier = TextInputStyle.toModifier()
                             .color(color = ThemeByKizito.Hint2_Color.rgb)
+                            .weight(1f)
                             .styleModifier {
                                 // Initial border
                                // property("border", "1px solid ${ThemeByKizito.Faq_Color_Stroke.rgb}")
@@ -427,6 +435,92 @@ private fun BottonPart(
 
                 }
 
+                 */
+
+
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .styleModifier {
+                            property("display", "flex")
+                            property("align-items", "stretch")
+                            property("min-width", "0") // critical - allows flex children to shrink below content size
+                        }
+                ) {
+
+                    TextInput(
+                        text = emailText,
+                        onTextChange = { input -> emailText = input },
+                        modifier = TextInputStyle.toModifier()
+                            .color(color = ThemeByKizito.Hint2_Color.rgb)
+                            .styleModifier {
+                                property("flex", "1 1 0")   // grow, shrink, start from 0 width
+                                property("min-width", "0")  // allow shrinking below content size
+                                property("width", "0px")    // force flex to control width, not content
+                                property("height", "auto")
+                                property("min-height", "40px")
+                            },
+                        placeholder = "example@gmail.com",
+                        placeholderColor = PlaceholderColor(color = ThemeByKizito.Hint2_Color.rgb),
+                        size = InputSize.LG,
+                        password = false,
+                        enabled = InputDefaults.Enabled,
+                        autoComplete = AutoComplete.email
+                    )
+
+                    Button(
+                        attrs = EmailButtonStyle.toModifier()
+                            .styleModifier {
+                                property("flex", "0 0 auto")  // never grow or shrink
+                                property("display", "flex")
+                                property("align-items", "center")
+                                property("justify-content", "center")
+                                property("white-space", "nowrap")
+                                property("border", "0.5px solid ${ThemeByKizito.Faq_Color_Stroke.rgb}")
+                                property("border-left", "none")
+                                property("box-sizing", "border-box")
+                            }
+                            .borderRadius(
+                                topRight = 8.px,
+                                bottomRight = 8.px,
+                                topLeft = 0.px,
+                                bottomLeft = 0.px
+                            )
+                            .fontFamily(ConstantsObject.FONT_FAMILY, ConstantsObject.FALL_BACK_FONT)
+                            .fontSize(
+                                when {
+                                    breakpoint <= Breakpoint.ZERO -> 10.px
+                                    breakpoint <= Breakpoint.SM -> 14.px
+                                    breakpoint <= Breakpoint.MD -> 12.px
+                                    breakpoint <= Breakpoint.LG -> 16.px
+                                    else -> 18.px
+                                }
+                            )
+                            .color(Color.white)
+                            .cursor(Cursor.Pointer)
+                            .userSelect(UserSelect.None)
+                            .padding(
+                                topBottom = when {
+                                    breakpoint <= Breakpoint.ZERO -> 9.px
+                                    breakpoint <= Breakpoint.SM -> 10.px
+                                    else -> 12.px
+                                },
+                                leftRight = when {
+                                    breakpoint <= Breakpoint.ZERO -> 10.px
+                                    breakpoint <= Breakpoint.SM -> 12.px
+                                    else -> 16.px
+                                }
+                            )
+                            .onContextMenu { event ->
+                                event.preventDefault()
+                                event.stopPropagation()
+                            }
+                            .toAttrs()
+                    ) {
+                        Text(value = "Get updates")
+                    }
+                }
 
 
 

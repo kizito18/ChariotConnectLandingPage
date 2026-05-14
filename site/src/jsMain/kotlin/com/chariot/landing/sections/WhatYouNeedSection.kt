@@ -90,11 +90,14 @@ fun WhatYouNeedSection(
 
 
     Column(
-        modifier = Modifier,
+        modifier = Modifier
+            .fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     )
     {
 
+
+        /*
 
         if (breakpoint <= Breakpoint.SM) {
 
@@ -142,6 +145,45 @@ fun WhatYouNeedSection(
             }
 
         }
+
+         */
+
+
+
+        if (breakpoint <= Breakpoint.SM) {
+
+            Row(
+                modifier = Modifier
+                    .width(100.svw)
+                    .padding(leftRight = 15.px),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+
+                // Remove key() - let the image animate in place via state
+                CustomImage(
+                    src = changingCategoryItem.imgPair.first,
+                    rotateDegree = (-12).deg,
+                    changingState = changingState,
+                    imgHeight = imgHeight
+                )
+
+//                Div(attrs = {
+//                    style {
+//                        width(90.px)
+//                        flexShrink(0) // prevent this spacer from collapsing
+//                    }
+//                })
+
+                CustomImage(
+                    src = changingCategoryItem.imgPair.second,
+                    rotateDegree = 12.deg,
+                    changingState = changingState,
+                    imgHeight = imgHeight
+                )
+            }
+        }
+
 
 
         if (breakpoint <= Breakpoint.SM) {
@@ -421,17 +463,17 @@ fun WhatYouNeedSection(
                     attrs = Modifier
                         .margin(all = 0.px)
                         .color(Color.black)
-                        .padding(all = 0.px)
+                        .padding(leftRight = 20.px)
                         .fontFamily(ConstantsObject.FONT_FAMILY, ConstantsObject.FALL_BACK_FONT)
                         .fontSize(
                             if (breakpoint <= Breakpoint.ZERO) {
-                                10.px
+                                14.px
                             } else {
                                 if (breakpoint <= Breakpoint.SM) {
-                                    12.px
+                                    14.px
                                 } else {
                                     if (breakpoint <= Breakpoint.MD) {
-                                        14.px
+                                        18.px
                                     } else {
                                         if (breakpoint <= Breakpoint.LG) {
                                             18.px
@@ -605,6 +647,7 @@ fun WhatYouNeedSection(
 
 
 
+/*
 
 @Composable
 private fun CustomImage(
@@ -616,22 +659,21 @@ private fun CustomImage(
     ) {
 
 
+    Box(modifier = Modifier.height(imgHeight)) {
 
-Box(modifier = Modifier.height(imgHeight)){
 
+        Image(
+            src = src,
+            modifier = Modifier
+                .transform {
+                    rotate(rotateDegree)
+                    when (changingState) {
+                        "exit" -> scale(0.995f)
+                        "enter" -> scale(1f)
+                        else -> scale(1f)
+                    }
 
-    Image(
-        src = src,
-        modifier = Modifier
-            .transform {
-                rotate(rotateDegree)
-                when (changingState) {
-                    "exit" -> scale(0.995f)
-                    "enter" -> scale(1f)
-                    else -> scale(1f)
                 }
-
-            }
 //            .opacity(
 //                when (changingState) {
 //                    "exit" -> 0.3f
@@ -639,27 +681,76 @@ Box(modifier = Modifier.height(imgHeight)){
 //                    else -> 1f
 //                }
 //            )
-            .transition(
-                Transition.of(property = "transform", duration = 500.ms),
-                Transition.of(property = "opacity", duration = 500.ms)
-            )
-            .margin(top = 30.px) // Offset the image down
-            .fillMaxHeight()
-            .objectFit(ObjectFit.Contain)
-            //.width(imageWidth)
-            // Disable right-click / long-press
-            .onContextMenu { event ->
-                event.preventDefault()
-                event.stopPropagation()
+                .transition(
+                    Transition.of(property = "transform", duration = 500.ms),
+                    Transition.of(property = "opacity", duration = 500.ms)
+                )
+                .margin(top = 30.px) // Offset the image down
+                .fillMaxHeight()
+                .objectFit(ObjectFit.Contain)
+                //.width(imageWidth)
+                // Disable right-click / long-press
+                .onContextMenu { event ->
+                    event.preventDefault()
+                    event.stopPropagation()
+                },
+            description = "image",
+        )
+
+    }
+
+
+}
+
+ */
+
+
+@Composable
+private fun CustomImage(
+    src: String,
+    rotateDegree: CSSSizeValue<CSSUnit.deg>,
+    changingState: String,
+    imgHeight: CSSSizeValue<CSSUnit.px>,
+) {
+
+    // Fixed width prevents layout shift when image src changes
+    Box(
+        modifier = Modifier
+            .height(imgHeight)
+            .width(imgHeight) // square container — adjust ratio if needed
+            .styleModifier {
+                property("flex-shrink", "0")
             },
-        description = "image",
-    )
+        contentAlignment = Alignment.Center
+    ) {
 
+        Image(
+            src = src,
+            modifier = Modifier
+                .transform {
+                    rotate(rotateDegree)
+                }
+                .opacity(
+                    when (changingState) {
+                        "exit" -> 0f       // fade out fully
+                        "enter" -> 1f      // fade in fully
+                        else -> 1f
+                    }
+                )
+                .transition(
+                    Transition.of(property = "opacity", duration = 400.ms),
+                    Transition.of(property = "transform", duration = 400.ms),
+                )
+                .fillMaxHeight()
+                .objectFit(ObjectFit.Contain)
+                .onContextMenu { event ->
+                    event.preventDefault()
+                    event.stopPropagation()
+                },
+            description = "image",
+        )
+    }
 }
-
-
-}
-
 
 
 
@@ -694,15 +785,16 @@ private fun StoreButton(
                 .borderRadius(r = 8.px)
                 .color(Color.white)
                 .fontFamily(ConstantsObject.FONT_FAMILY, ConstantsObject.FALL_BACK_FONT)
+                .fontWeight(FontWeight.SemiBold)
                 .fontSize(
                     if (breakpoint <= Breakpoint.ZERO) {
-                        10.px
+                        12.px
                     }else {
                         if (breakpoint <= Breakpoint.SM) {
-                            10.px
+                            12.px
                         } else {
                             if (breakpoint <= Breakpoint.MD) {
-                                12.px
+                                14.px
                             } else {
                                 if (breakpoint <= Breakpoint.LG) {
                                     16.px
@@ -719,10 +811,10 @@ private fun StoreButton(
                 .userSelect(UserSelect.None)
                 .padding(
                     leftRight = if (breakpoint <= Breakpoint.ZERO){
-                        18.px
+                        40.px
                     } else {
                         if (breakpoint <= Breakpoint.SM){
-                            20.px
+                            40.px
                         } else {
                             if (breakpoint <= Breakpoint.MD){
                                 26.px
@@ -759,16 +851,16 @@ private fun StoreButton(
                     modifier = Modifier
                         .size(
                             size = if (breakpoint <= Breakpoint.ZERO) {
-                                14.px
+                                18.px
                             }else {
                                 if (breakpoint <= Breakpoint.SM) {
-                                    16.px
+                                    18.px
                                 } else {
                                     if (breakpoint <= Breakpoint.MD) {
-                                        18.px
+                                        20.px
                                     } else {
 
-                                        20.px
+                                        22.px
                                     }
                                 }
                             }

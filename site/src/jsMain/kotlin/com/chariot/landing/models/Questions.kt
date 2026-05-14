@@ -7,18 +7,18 @@ enum class Questions(
     val ans: String,
 ) {
     First(
-        qus = "What is Umail?",
+        qus = "What is UMALI?",
         ans = """
-            **Umail** is a fast and reliable on-demand delivery platform that connects customers with local vendors to deliver **food, groceries, and pharmaceutical products** right to your doorstep. 
+            **UMALI** is a fast and reliable on-demand delivery platform that connects customers with local vendors to deliver **food, groceries, and pharmaceutical products** right to your doorstep. 
             
             We make everyday essentials easily accessible with just a few taps on your phone.
         """.trimIndent(),
     ),
 
     Second(
-        qus = "Does Umail deliver groceries?",
+        qus = "Does UMALI deliver groceries?",
         ans = """
-            ✅ **Yes!** Umail delivers fresh groceries from local stores near you. 
+            ✅ **Yes!** UMALI delivers fresh groceries from local stores near you. 
             
             You can order everything from:
             - 🥬 Fresh produce
@@ -32,7 +32,7 @@ enum class Questions(
     ),
 
     Third(
-        qus = "Will my groceries be fresh if I order on Umail?",
+        qus = "Will my groceries be fresh if I order on UMALI?",
         ans = """
             🛡️ **Absolutely!** We partner with trusted local grocery vendors who maintain high quality standards. 
             
@@ -46,11 +46,11 @@ enum class Questions(
     ),
 
     Fourth(
-        qus = "How do I sign up as a vendor on Umail?",
+        qus = "How do I sign up as a vendor on UMALI?",
         ans = """
             📝 **Signing up as a vendor is easy!** 
             
-            1. 📲 Download the Umail vendor app
+            1. 📲 Download the UMALI vendor app
             2. 🔘 Click 'Register as Vendor'
             3. 📋 Complete the registration process in 3 simple steps:
                - **Step 1:** Provide your business information (business name, address, location, and type of products)
@@ -62,12 +62,12 @@ enum class Questions(
     ),
 
     Fifth(
-        qus = "How do I create an account on Umail?",
+        qus = "How do I create an account on UMALI?",
         ans = """
-            👤 **Creating a Umail account is simple!**
+            👤 **Creating a UMALI account is simple!**
             
             **Method 1 - Email Sign Up:**
-            1. 📲 Download the Umail customer app
+            1. 📲 Download the UMALI customer app
             2. 🔘 Tap 'Sign Up'
             3. 📧 Enter your email address
             4. 🔐 Create a password

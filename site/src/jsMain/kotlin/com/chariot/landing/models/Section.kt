@@ -1,12 +1,11 @@
 package com.chariot.landing.models
 
 
-enum class Section(
+enum class SectionAnimation(
     val id: String,
     val title: String,
     val path: String
 ) {
-
 
     WhatYouNeed(
         id = "whatYouNeedId",
@@ -24,10 +23,16 @@ enum class Section(
         id = "whatSpecialImageBottomId",
         title = "",
         path = "#whatSpecialImageBottomId"
-    ),
+    )
+}
 
 
 
+enum class Section(
+    val id: String,
+    val title: String,
+    val path: String
+) {
     Home(
         id = "homeId",
         title = "Home",

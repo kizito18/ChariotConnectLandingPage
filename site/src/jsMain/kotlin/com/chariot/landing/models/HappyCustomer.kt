@@ -14,7 +14,7 @@ enum class HappyCustomer(
     Content(
         title = "Happy Customers",
         description = """
-            **Umail** has made customers happy across the country by delivering smile
+            **UMALI** has made customers happy across the country by delivering smile
         """.trimIndent(),
         topImgList = listOf(
             ResObject.Image.happy_top1_img,

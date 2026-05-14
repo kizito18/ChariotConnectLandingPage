@@ -7,6 +7,7 @@ import com.chariot.landing.models.HappyCustomer
 import com.chariot.landing.util.ConstantsObject
 import com.varabyte.kobweb.compose.css.*
 import com.varabyte.kobweb.compose.foundation.layout.Arrangement
+import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.foundation.layout.Row
 import com.varabyte.kobweb.compose.ui.Alignment
@@ -159,18 +160,24 @@ fun HappyCustomerSection() {
                 .toAttrs()
         )
 
-        RenderMarkdown(
-            editText = sectionContent.description,
-            textColor = Color.black,
-            fontWeightValue = FontWeight.Normal,
-            fontSize = when {
-                breakpoint <= Breakpoint.ZERO -> 10.px
-                breakpoint <= Breakpoint.SM -> 12.px
-                breakpoint <= Breakpoint.MD -> 18.px
-                breakpoint <= Breakpoint.LG -> 20.px
-                else -> 16.px
-            }
-        )
+        Box(modifier = Modifier
+            .fillMaxWidth()
+            .padding(leftRight = 10.px)
+        ) {
+
+            RenderMarkdown(
+                editText = sectionContent.description,
+                textColor = Color.black,
+                fontWeightValue = FontWeight.Normal,
+                fontSize = when {
+                    breakpoint <= Breakpoint.ZERO -> 14.px
+                    breakpoint <= Breakpoint.SM -> 14.px
+                    breakpoint <= Breakpoint.MD -> 18.px
+                    breakpoint <= Breakpoint.LG -> 20.px
+                    else -> 16.px
+                }
+            )
+        }
 
         Div(
             attrs = Modifier

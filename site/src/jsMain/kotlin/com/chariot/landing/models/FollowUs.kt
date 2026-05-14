@@ -13,7 +13,7 @@ enum class FollowUs(
     ),
     Tiktok(
         title = "Tiktok",
-        link = ConstantsObject.FACE_BOOK_WEB_LINK
+        link = ConstantsObject.TIKTOK
     ),
     Twitter(
         title = "X (Twitter)",

@@ -23,9 +23,9 @@ enum class SupportBusinesses(
             Mama Nkechi store
         """.trimIndent(),
         description = """
-            **Umail** considers local vendors(SME’s) giving them opportunity to grow their business and reach more customers.
+            **UMALI** considers local vendors(SME’s) giving them opportunity to grow their business and reach more customers.
 
-            You can get your favourite dish and groceries from your local vendors on Umail
+            You can get your favourite dish and groceries from your local vendors on UMALI
         """.trimIndent(),
         img = ResObject.Image.img_support_busines,
 

@@ -23,7 +23,7 @@ enum class MultiplePackage(
             Packages at once
         """.trimIndent(),
         description = """
-            Deliver 1 or multiple packages to all your loved ones, friends and customers with **Umail** all on one pickup.
+            Deliver 1 or multiple packages to all your loved ones, friends and customers with **UMALI** all on one pickup.
         """.trimIndent(),
         mainImgFrame = ResObject.Image.img_pack_f1,
         listOfChangeableImg = listOf(

@@ -47,7 +47,7 @@ fun FaqSection() {
             .fillMaxWidth()
             .padding(
                 leftRight = if (breakpoint <= Breakpoint.ZERO) {
-                    30.px
+                    18.px
                 } else {
                     if (breakpoint <= Breakpoint.SM) {
                         50.px
@@ -566,7 +566,7 @@ private fun MobileView(
                         .padding(all = 0.px)
                         .fontFamily(ConstantsObject.FONT_FAMILY, ConstantsObject.FALL_BACK_FONT)
                         .fontSize(
-                            if (breakpoint <= Breakpoint.ZERO) 10.px else 14.px
+                            if (breakpoint <= Breakpoint.ZERO) 12.px else 14.px
                         )
                         .fontWeight(FontWeight.Bold)
                         .weight(1f)
@@ -660,7 +660,7 @@ private fun MobileView(
                                 editText = quesAns.ans,
                                 textColor = ThemeByKizito.Gray2.rgb,
                                 fontWeightValue = FontWeight.Normal,
-                                fontSize = if (breakpoint <= Breakpoint.ZERO) 10.px else 12.px
+                                fontSize = if (breakpoint <= Breakpoint.ZERO) 12.px else 14.px
                             )
                         }
                     }

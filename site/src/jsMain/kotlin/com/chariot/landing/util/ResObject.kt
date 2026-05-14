@@ -38,8 +38,11 @@ object ResObject {
         const val img_ai_f3 = "/img_ai_f3.png"
         const val img_ai_f4 = "/img_ai_f4.png"
 
-        const val img_purpose_f1 = "/img_purpose_f1.png"
-        const val img_purpose_f2 = "/img_purpose_f2.png"
+        const val img_purpose_f1_big = "/img_purpose_f1_big.png"
+        const val img_purpose_f2_big = "/img_purpose_f2_big.png"
+
+        const val img_purpose_f1_small = "/img_purpose_f1_small.png"
+        const val img_purpose_f2_small = "/img_purpose_f2_small.png"
 
         const val img_chat_f = "/img_chat_f.png"
 

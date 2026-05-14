@@ -3,12 +3,12 @@ package com.chariot.landing.sections
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import com.chariot.landing.models.Section
+import com.chariot.landing.models.SectionAnimation
 import com.chariot.landing.models.ThemeByKizito
 import com.chariot.landing.util.ConstantsObject
 import com.chariot.landing.util.ObserveViewportEntered
@@ -31,7 +31,6 @@ import com.varabyte.kobweb.silk.components.layout.numColumns
 import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import org.jetbrains.compose.web.css.Color
 import org.jetbrains.compose.web.css.ms
 import org.jetbrains.compose.web.css.px
@@ -132,13 +131,13 @@ fun WhatSpecial(
                     .fontFamily(ConstantsObject.FONT_FAMILY, ConstantsObject.FALL_BACK_FONT)
                     .fontSize(
                         if (breakpoint <= Breakpoint.ZERO) {
-                            10.px
+                            14.px
                         } else {
                             if (breakpoint <= Breakpoint.SM) {
-                                12.px
+                                14.px
                             } else {
                                 if (breakpoint <= Breakpoint.MD) {
-                                    14.px
+                                    18.px
                                 } else {
                                     if (breakpoint <= Breakpoint.LG) {
                                         18.px
@@ -244,7 +243,7 @@ fun WhatSpecial(
                     .gridColumn("1 / -1") // Span all columns
             ) {
 
-                AppPurposeSection()
+                AppPurposeSection(breakpoint = breakpoint)
 
 
             }
@@ -292,7 +291,7 @@ private fun AiAnimationSection(
 
 
     Box(modifier = Modifier
-        .id(Section.WhatSpecialIconTop.id)
+        .id(SectionAnimation.WhatSpecialIconTop.id)
         .fillMaxWidth()
     ) {
         CustomImage(
@@ -319,7 +318,7 @@ private fun AiAnimationSection(
 
 
     ObserveViewportEntered(
-        sectionId = Section.WhatSpecialIconTop.id,
+        sectionId = SectionAnimation.WhatSpecialIconTop.id,
         distanceFromTop = 300.0,
         onViewportEntered = {
 
@@ -337,18 +336,19 @@ private fun AiAnimationSection(
 
 @Composable
 private fun AppPurposeSection(
-
+breakpoint: Breakpoint
 ){
 
     val showPhoneImage = remember { mutableStateOf(false) }
 
     var isViewportEntered by remember { mutableStateOf(false) }
 
+    val breakpoint by rememberUpdatedState(breakpoint)
 
 
     LaunchedEffect(isViewportEntered){
         if (isViewportEntered) {
-            delay(1200)
+            //delay(1200)
             showPhoneImage.value = true
         }
     }
@@ -356,10 +356,12 @@ private fun AppPurposeSection(
 
     Box(modifier = Modifier
         .fillMaxWidth()
-        .id(Section.WhatSpecialIconBottom.id)
+        .id(SectionAnimation.WhatSpecialIconBottom.id)
     ) {
         CustomImage(
-            src = ResObject.Image.img_purpose_f1,
+            src = if (breakpoint <= Breakpoint.SM){
+                ResObject.Image.img_purpose_f1_small
+            }else ResObject.Image.img_purpose_f1_big,
         )
 
         Image(
@@ -376,7 +378,9 @@ private fun AppPurposeSection(
                     event.preventDefault()
                     event.stopPropagation()
                 },
-            src = ResObject.Image.img_purpose_f2,
+            src = if (breakpoint <= Breakpoint.SM){
+                ResObject.Image.img_purpose_f2_small
+            }else ResObject.Image.img_purpose_f2_big,
             description = "image",
         )
     }
@@ -384,7 +388,7 @@ private fun AppPurposeSection(
 
 
     ObserveViewportEntered(
-        sectionId = Section.WhatSpecialIconTop.id,
+        sectionId = SectionAnimation.WhatSpecialIconBottom.id,
         distanceFromTop = 230.0,
         onViewportEntered = {
 

@@ -18,7 +18,7 @@ enum class DoMore(
         description = """
             Do you own a restaurant, grocery store, or pharmacy?
             <p>
-            Register to Umail to reach new customers and grow your business with ease.
+            Register to UMALI to reach new customers and grow your business with ease.
         """.trimIndent(),
         buttonText = "Become a vendor"
     ),
@@ -29,13 +29,13 @@ enum class DoMore(
         description = """
             Want to be a rider who delivers packages to customer?
             <p>
-            Become a Umail rider and bring smile to the faces of hundreds and earn while at it.
+            Become a UMALI rider and bring smile to the faces of hundreds and earn while at it.
         """.trimIndent(),
         buttonText = "Become a rider"
     );
 
     companion object {
-        const val mainHeaderText = "Do more with Umail"
+        const val mainHeaderText = "Do more with UMALI"
     }
 
 }
