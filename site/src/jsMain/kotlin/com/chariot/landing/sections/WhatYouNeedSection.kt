@@ -26,6 +26,7 @@ import com.varabyte.kobweb.silk.style.toModifier
 import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import kotlinx.coroutines.delay
 import org.jetbrains.compose.web.css.*
+import org.jetbrains.compose.web.css.AlignContent
 import org.jetbrains.compose.web.dom.*
 
 
@@ -566,6 +567,7 @@ fun WhatYouNeedSection(
 
                     ) {
                         StoreButton(
+                            modifier = Modifier,
                             breakpoint = breakpoint,
                             buttonText = "Download on Google Play",
                             buttonIcon = ResObject.Icon.playStore,
@@ -585,6 +587,7 @@ fun WhatYouNeedSection(
                         })
 
                         StoreButton(
+                            modifier = Modifier,
                             breakpoint = breakpoint,
                             buttonText = "Download on App Store",
                             buttonIcon = ResObject.Icon.appStore,
@@ -646,65 +649,6 @@ fun WhatYouNeedSection(
 
 
 
-
-/*
-
-@Composable
-private fun CustomImage(
-    src: String,
-    rotateDegree: CSSSizeValue<CSSUnit.deg>,
-    changingState: String,
-    imgHeight:  CSSSizeValue<CSSUnit.px>,
-
-    ) {
-
-
-    Box(modifier = Modifier.height(imgHeight)) {
-
-
-        Image(
-            src = src,
-            modifier = Modifier
-                .transform {
-                    rotate(rotateDegree)
-                    when (changingState) {
-                        "exit" -> scale(0.995f)
-                        "enter" -> scale(1f)
-                        else -> scale(1f)
-                    }
-
-                }
-//            .opacity(
-//                when (changingState) {
-//                    "exit" -> 0.3f
-//                    "enter" -> 1f
-//                    else -> 1f
-//                }
-//            )
-                .transition(
-                    Transition.of(property = "transform", duration = 500.ms),
-                    Transition.of(property = "opacity", duration = 500.ms)
-                )
-                .margin(top = 30.px) // Offset the image down
-                .fillMaxHeight()
-                .objectFit(ObjectFit.Contain)
-                //.width(imageWidth)
-                // Disable right-click / long-press
-                .onContextMenu { event ->
-                    event.preventDefault()
-                    event.stopPropagation()
-                },
-            description = "image",
-        )
-
-    }
-
-
-}
-
- */
-
-
 @Composable
 private fun CustomImage(
     src: String,
@@ -757,6 +701,7 @@ private fun CustomImage(
 
 @Composable
 private fun StoreButton(
+    modifier: Modifier = Modifier,
     breakpoint: Breakpoint,
     buttonText: String,
     buttonIcon: String,
@@ -764,124 +709,147 @@ private fun StoreButton(
 
 ){
 
+//    Box(modifier = modifier
+//        .fillMaxWidth()
+//    ) {
 
-    Link(
-        modifier = Modifier
-            .textDecorationLine(TextDecorationLine.None)
-            // Disable right-click / long-press
-            .onContextMenu { event ->
-                event.preventDefault()
-                event.stopPropagation()
-            },
-        path = storeLink,
-        openExternalLinksStrategy = OpenLinkStrategy.IN_NEW_TAB
-    )
-    {
-
-
-        Button(
-            attrs = VisitStoreStyle.toModifier()
-                .border(width = 0.px)
-                .borderRadius(r = 8.px)
-                .color(Color.white)
-                .fontFamily(ConstantsObject.FONT_FAMILY, ConstantsObject.FALL_BACK_FONT)
-                .fontWeight(FontWeight.SemiBold)
-                .fontSize(
-                    if (breakpoint <= Breakpoint.ZERO) {
-                        12.px
-                    }else {
-                        if (breakpoint <= Breakpoint.SM) {
-                            12.px
-                        } else {
-                            if (breakpoint <= Breakpoint.MD) {
-                                14.px
-                            } else {
-                                if (breakpoint <= Breakpoint.LG) {
-                                    16.px
-                                } else {
-                                    18.px
-                                }
-                            }
-                        }
-                    }
-
+        Link(
+            modifier = modifier
+                .then(      if (breakpoint <= Breakpoint.SM) {
+                    Modifier.fillMaxWidth(if (breakpoint <= Breakpoint.ZERO) 100.percent else 90.percent)
+                } else {
+                    Modifier
+                }
                 )
-                .fontWeight(400)
-                .cursor(Cursor.Pointer)
-                .userSelect(UserSelect.None)
-                .padding(
-                    leftRight = if (breakpoint <= Breakpoint.ZERO){
-                        40.px
-                    } else {
-                        if (breakpoint <= Breakpoint.SM){
-                            40.px
-                        } else {
-                            if (breakpoint <= Breakpoint.MD){
-                                26.px
-                            } else 30.px
-                        }
-                    },
-                    topBottom =if (breakpoint <= Breakpoint.ZERO){
-                        12.px
-                    } else {
-                        if (breakpoint <= Breakpoint.SM){
-                            14.px
-                        } else {
-                            if (breakpoint <= Breakpoint.MD){
-                                16.px
-                            } else 18.px
-                        }
-                    }
-                )
+                .textDecorationLine(TextDecorationLine.None)
                 // Disable right-click / long-press
                 .onContextMenu { event ->
                     event.preventDefault()
                     event.stopPropagation()
-                }
-                .toAttrs()
+                },
+            path = storeLink,
+            openExternalLinksStrategy = OpenLinkStrategy.IN_NEW_TAB
         )
         {
 
-            Row(modifier = Modifier,
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(8.px)
-            ) {
 
-                Image(
-                    modifier = Modifier
-                        .size(
-                            size = if (breakpoint <= Breakpoint.ZERO) {
-                                18.px
-                            }else {
-                                if (breakpoint <= Breakpoint.SM) {
-                                    18.px
+            Button(
+                attrs = VisitStoreStyle.toModifier()
+                    .border(width = 0.px)
+                    .borderRadius(r = 8.px)
+                    .color(Color.white)
+                    .fontFamily(ConstantsObject.FONT_FAMILY, ConstantsObject.FALL_BACK_FONT)
+                    .fontWeight(FontWeight.SemiBold)
+                    .fontSize(
+                        if (breakpoint <= Breakpoint.ZERO) {
+                            14.px
+                        } else {
+                            if (breakpoint <= Breakpoint.SM) {
+                                14.px
+                            } else {
+                                if (breakpoint <= Breakpoint.MD) {
+                                    14.px
                                 } else {
-                                    if (breakpoint <= Breakpoint.MD) {
-                                        20.px
+                                    if (breakpoint <= Breakpoint.LG) {
+                                        16.px
                                     } else {
-
-                                        22.px
+                                        18.px
                                     }
                                 }
                             }
-                        )
-                        // Disable right-click / long-press
-                        .onContextMenu { event ->
-                            event.preventDefault()
-                            event.stopPropagation()
+                        }
+
+                    )
+                    .fontWeight(400)
+                    .alignContent(AlignContent.Center)
+                    .cursor(Cursor.Pointer)
+                    .userSelect(UserSelect.None)
+                    .padding(
+                        leftRight = if (breakpoint <= Breakpoint.ZERO) {
+                            40.px
+                        } else {
+                            if (breakpoint <= Breakpoint.SM) {
+                                40.px
+                            } else {
+                                if (breakpoint <= Breakpoint.MD) {
+                                    26.px
+                                } else 30.px
+                            }
                         },
-                    src = buttonIcon,
-                    description = "store icon",
-                )
+                        topBottom = if (breakpoint <= Breakpoint.ZERO) {
+                            12.px
+                        } else {
+                            if (breakpoint <= Breakpoint.SM) {
+                                14.px
+                            } else {
+                                if (breakpoint <= Breakpoint.MD) {
+                                    16.px
+                                } else 18.px
+                            }
+                        }
+                    )
+                    // Disable right-click / long-press
+                    .onContextMenu { event ->
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+                    .toAttrs()
+            )
+            {
 
-                Text(value = buttonText)
+                Row(
+                    modifier = Modifier,
+                    verticalAlignment = Alignment.CenterVertically,
+                    //horizontalArrangement = Arrangement.spacedBy(8.px) ,
+                    horizontalArrangement = Arrangement.Center
+                ) {
 
+                    Image(
+                        modifier = Modifier
+                            .size(
+                                size = if (breakpoint <= Breakpoint.ZERO) {
+                                    20.px
+                                } else {
+                                    if (breakpoint <= Breakpoint.SM) {
+                                        20.px
+                                    } else {
+                                        if (breakpoint <= Breakpoint.MD) {
+                                            20.px
+                                        } else {
+
+                                            22.px
+                                        }
+                                    }
+                                }
+                            )
+                            // Disable right-click / long-press
+                            .onContextMenu { event ->
+                                event.preventDefault()
+                                event.stopPropagation()
+                            },
+                        src = buttonIcon,
+                        description = "store icon",
+                    )
+
+                    Div(attrs = {
+                        style {
+                            width(8.px)
+                        }
+                    }
+                    )
+
+                    Text(value = buttonText)
+
+
+                }
 
             }
 
         }
 
-    }
+
+    //}
+
 
 
 }

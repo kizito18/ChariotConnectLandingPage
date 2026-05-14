@@ -17,8 +17,8 @@ import org.jetbrains.compose.web.css.ms
 val VisitStoreStyle = CssStyle {
     base {
         Modifier
-            .background(Color.black)
             .fillMaxWidth()
+            .background(Color.black)
             .scale(1f)
             .transition(Transition.of(property = "translate", duration = 100.ms))
             .transition(Transition.of(property = "background", duration = 200.ms))

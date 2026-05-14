@@ -12,6 +12,7 @@ object ResObject {
         const val appStore = "/apple_icon.svg"
         const val hamburger = "/hamburger_icon.svg"
         const val logo_white = "/logo_white_icon.svg"
+        const val logo_white_cut = "/logo_white_cut_icon.svg"
 
 
         const val store_icon = "/store_icon.png"

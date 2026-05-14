@@ -243,7 +243,7 @@ private fun BottonPart(
                             event.preventDefault()
                             event.stopPropagation()
                         },
-                    src = ResObject.Icon.logo_white,
+                    src = ResObject.Icon.logo_white_cut,
                     description = "icon",
                 )
 

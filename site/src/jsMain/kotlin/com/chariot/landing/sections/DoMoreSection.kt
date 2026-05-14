@@ -101,7 +101,7 @@ fun DoMoreSectionSection(
 
     val descriptionFontSize = remember {
         if (breakpoint <= Breakpoint.ZERO) {
-            10.px
+            12.px
         } else {
             if (breakpoint <= Breakpoint.SM) {
                 12.px
@@ -345,6 +345,19 @@ fun DoMoreSectionSection(
             )
             {
 
+                if (breakpoint <= Breakpoint.SM){
+                    Div(
+                        attrs = Modifier
+                            .styleModifier {
+                                property(
+                                    propertyName = "height",
+                                    value = 20.px
+                                )
+                            }
+                            .toAttrs()
+                    )
+                }
+
 
                 Image(
                     modifier = Modifier
@@ -508,7 +521,7 @@ private fun CustomButton(
                 .fontFamily(ConstantsObject.FONT_FAMILY, ConstantsObject.FALL_BACK_FONT)
                 .fontSize(
                     if (breakpoint <= Breakpoint.ZERO) {
-                        10.px
+                        12.px
                     }else {
                         if (breakpoint <= Breakpoint.SM) {
                             14.px
