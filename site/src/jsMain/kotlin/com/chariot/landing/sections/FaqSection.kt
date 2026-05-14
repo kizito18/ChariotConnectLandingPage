@@ -576,6 +576,7 @@ private fun MobileView(
                                 duration = 400.ms // Slower color transition
                             )
                         )
+                        .userSelect(UserSelect.None)
                         .toAttrs()
                 ) {
                     Text(value = quesAns.qus)

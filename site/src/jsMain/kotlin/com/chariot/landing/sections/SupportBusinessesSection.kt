@@ -226,10 +226,10 @@ fun SupportBusinessesSection() {
                     textColor = Color.black,
                     fontWeightValue = FontWeight.Normal ,
                     fontSize = if (breakpoint <= Breakpoint.ZERO) {
-                        10.px
+                        14.px
                     } else {
                         if (breakpoint <= Breakpoint.SM) {
-                            12.px
+                            14.px
                         } else {
                             if (breakpoint <= Breakpoint.MD) {
                                 14.px
